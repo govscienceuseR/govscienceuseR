@@ -1,0 +1,65 @@
+#' Easily Install and Load the \code{govscienceuseR} Tools for automated extraction 
+#' and disambiguation of scientific resources cited in government documents.
+#' 
+#' \code{govscienceuseR} is a collection of software packages for bibliometric
+#' analysis of policy documents that are designed to work together. 
+#' This package is designed to make it easy to install
+#' and load multiple \code{govscienceuseR} packages in a single step.
+#' 
+#' \code{govscienceuseR} software implements advances in tagging, classifying, 
+#' and disambiguating references found in unstructured text (e.g., PDFs). 
+#' Together, the set of packages provide a workflow that ultimately allows
+#' the user to perform a range of bibliometric analyses.
+#' 
+#' The code is actively developed and maintained by the \code{govscienceuseR}
+#' development team. New functionality is being added over time.
+#' 
+#' \code{govscienceuseR} packages are primarily written in \code{R}.
+#' The govscienceuseR project uses an
+#' open development process for the packages, hosted
+#' on GitHub \url{https://github.com/govscienceuseR}, and contributions can be made
+#' via pull requests.
+#' 
+#' Training materials are also available online, 
+#' please see the \code{govscienceuseR} project
+#' website at \url{https://www.govscienceuseR.github.io} for more information.
+#' 
+#' The full suite of packages has the following components (those automatically
+#' downloaded with the \pkg{govscienceuseR} package are noted):
+#' 
+#' For data handling:
+#'   
+#' \itemize{
+#' 
+#'     \item \pkg{[referenceExtract](https://github.com/govscienceuseR/referenceExtract)} 
+#'     Process PDFs and tag citations/references observed in PDFs.
+#'     (automatically downloaded)
+#'     
+#'     \item \pkg{[referenceClassify](https://github.com/govscienceuseR/referenceClassify)}
+#'     Clean and classify citations by category (e.g., academic journal, agency document)  
+#'     (automatically downloaded)
+#'
+#'     \item \pkg{[indexBuild](https://github.com/govscienceuseR/indexBuild)}
+#'     Create a database of academic work to search against for disambiguating extracted citations. 
+#'     (automatically downloaded)
+#'     
+#'     \item \pkg{[referenceSearch](https://github.com/govscienceuseR/referenceSearch)}
+#'     Search extracted citations against indexed database of canonical citations to match and disambiguate extracted citations.
+#'     (automatically downloaded)
+
+
+
+#' \code{citation("packgename")}.  Thank you!
+#' 
+#' @name govscienceuseR-package
+#' @aliases govscienceuseR-package govscienceuseR
+#' @docType package
+#' @author govscienceuseR Development Team \email{contact@govscienceuseR.org}
+#' 
+#' Maintainer: Tyler A. Scott \email{tascott@@ucdavis.edu}
+#'
+#' 
+
+NULL
+
+
