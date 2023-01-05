@@ -1,0 +1,33 @@
+Package: govscienceuseR
+Type: Package
+Title: GovscienceuseR: Tools for automated extraction and disambiguation of scientific resources cited in government documents
+Version: 0.1.0
+Authors@R: 
+    c( 
+    person(given = "Tyler",
+           family = "Scott",
+           role = c("aut")),
+    person(given = "Liza",
+           family = "Wood",
+           role = c("aut", "cre"),
+           email = "belwood@ucdavis.edu"))
+Description: 
+    govscienceuseR is a collection of software packages for bibliometric
+    analysis of policy documents that are designed to work together. 
+    This package is designed to make it easy to install and load multiple 
+    govscienceuseR packages in a single step.
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    tools,
+    utils,
+    devtools
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+License: MIT + file LICENSE

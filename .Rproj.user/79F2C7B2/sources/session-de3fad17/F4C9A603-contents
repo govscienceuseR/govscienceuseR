@@ -27,29 +27,26 @@
 #' The full suite of packages has the following components (those automatically
 #' downloaded with the \pkg{govscienceuseR} package are noted):
 #' 
-#' For data handling:
 #'   
 #' \itemize{
 #' 
-#'     \item \pkg{[referenceExtract](https://github.com/govscienceuseR/referenceExtract)} 
+#'     \item \pkg{referenceExtract} 
 #'     Process PDFs and tag citations/references observed in PDFs.
 #'     (automatically downloaded)
 #'     
-#'     \item \pkg{[referenceClassify](https://github.com/govscienceuseR/referenceClassify)}
+#'     \item \pkg{referenceClassify}
 #'     Clean and classify citations by category (e.g., academic journal, agency document)  
 #'     (automatically downloaded)
 #'
-#'     \item \pkg{[indexBuild](https://github.com/govscienceuseR/indexBuild)}
+#'     \item \pkg{indexBuild}
 #'     Create a database of academic work to search against for disambiguating extracted citations. 
 #'     (automatically downloaded)
 #'     
-#'     \item \pkg{[referenceSearch](https://github.com/govscienceuseR/referenceSearch)}
+#'     \item \pkg{referenceSearch}
 #'     Search extracted citations against indexed database of canonical citations to match and disambiguate extracted citations.
 #'     (automatically downloaded)
-
-
-
-#' \code{citation("packgename")}.  Thank you!
+#'}
+#' \code{citation("packagename")}.  Thank you!
 #' 
 #' @name govscienceuseR-package
 #' @aliases govscienceuseR-package govscienceuseR
@@ -61,5 +58,3 @@
 #' 
 
 NULL
-
-
