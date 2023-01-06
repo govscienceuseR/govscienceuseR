@@ -11,6 +11,7 @@ output:
     toc: true
     toc_float: true
     code_download: true
+  pdf:
 ---
 
 ```{r chunk setup, include = F}
