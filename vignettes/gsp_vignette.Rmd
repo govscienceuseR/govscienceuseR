@@ -11,7 +11,6 @@ output:
     toc: true
     toc_float: true
     code_download: true
-  pdf:
 ---
 
 ```{r chunk setup, include = F}
@@ -77,7 +76,10 @@ devtools::install_github("govscienceuseR/referenceBuild")
 devtools::install_github("govscienceuseR/citationSearch")
 ```
 
-Then load these and dependent packages into library. [**Note: All of the dependent packages required should be imported when we load in these packages, but they currently aren't -- still strugglin with package imports when function-building**]. You may be prompted to install some of the dependent packages if you do not already have them, such as `keras`.  
+```{r echo = F}
+send_mailto <- 'tascott@ucdavis.edu'
+```
+Then load these and dependent packages into library. [**Note: All of the dependent packages required should be imported when we load in these packages, but they currently aren't -- still struggling with package imports when function-building**]. You may be prompted to install some of the dependent packages if you do not already have them, such as `keras`.  
 
 ```{r package setup, warning = F, message = F, results = F}
 library(referenceExtract)
@@ -96,10 +98,10 @@ Outside of R, the `referenceSearch` package also requires installation and runni
 
 #### Data    
 
-The documents of interest for this paper are California's Groundwater Sustainability Plans. These documents are available publicly to download from [Box](https://ucdavis.box.com/s/9m3dogbibkrwy01pg4sdwouhzl8i6sef). To follow along with this tutorial, download the files to a file that will be considered your document directory. My document directory is specified below. There are `r length(list.files("~/Box/reference_classifier/documents_gsp/"))` plans which total over 160,000 pages.  
+The documents of interest for this paper are California's Groundwater Sustainability Plans. These documents are available publicly to download from [Box](https://ucdavis.box.com/s/9m3dogbibkrwy01pg4sdwouhzl8i6sef). To follow along with this tutorial, download the files to a file that will be considered your document directory. My document directory is specified below. There are `r length(list.files("reference_classifier/documents_gsp/"))` plans which total over 160,000 pages.  
 
 ```{r set doc dir}
-doc_directory <- "~/Box/reference_classifier/documents_gsp/"
+doc_directory <- "reference_classifier/documents_gsp/"
 ```
 
 ```{r count pages, eval = F, echo = F}
@@ -119,12 +121,12 @@ The `referenceExtract` package from govscienceuseR is designed to take unstructu
 The first step of extracting references is to input PDF documents into the `reference_extract()` function. This function reads in every PDF in the document directory (doc_dir), and runs them through anystyle.io. Anystyle extracts probable citations and exports them to the reference directory (ref_dir) as JSON files. Depending on the number and size of files, this can take some time. For example, these 114 documents took over an hour to extract.  
 
 ```{r set ref dir covert, echo = F}
-ref_directory <- "gsp_vignette_files/data/ref_dir"
+ref_directory <- "vignettes/gsp_vignette_files/data/ref_dir"
 ```
 
 ```{r reference extract, eval = F}
 # Extract probable citations from PDF documents and convert them to .json files
-ref_directory <- "gsp_vignette_files/data/ref_dir"
+ref_directory <- "vignettes/gsp_vignette_files/data/ref_dir"
 reference_extract(doc_dir = doc_directory, 
                  ref_dir = ref_directory, 
                  layout = "none")
@@ -168,8 +170,8 @@ dt <- reference_clean(dt)
 ```
 
 ```{r load ref clean dt covert, echo = F}
-#saveRDS(cleaned_dt, "gsp_vignette_files/data/dt_post_refclean.RDS")
-dt <- readRDS("gsp_vignette_files/data/dt_post_refclean.RDS")
+#saveRDS(cleaned_dt, "vignettes/gsp_vignette_files/data/dt_post_refclean.RDS")
+dt <- readRDS("vignettes/gsp_vignette_files/data/dt_post_refclean.RDS")
 ```
 
 This cleaning process has changed probable citations now a bit. Some of the probable citations have been unnested (and therefore expanded) while others have been removed, leaving us with `r nrow(dt)` probable citations. Examples of these probable citations are below:   
@@ -273,11 +275,11 @@ dt$agency <- ifelse(dt$agency == "Fish and Wildlife Service",
                     "US Fish and Wildlife Service", dt$agency)
 dt$agency <- ifelse(dt$agency == "Forest Service", 
                     "US Forest Service", dt$agency)
-saveRDS(dt, 'gsp_vignette_files/data/dt_withagencies.rds')
+saveRDS(dt, 'vignettes/gsp_vignette_files/data/dt_withagencies.rds')
 ```
 
 ```{r, echo = F}
-dt <- readRDS('gsp_vignette_files/data/dt_withagencies.rds')
+dt <- readRDS('vignettes/gsp_vignette_files/data/dt_withagencies.rds')
 ```
 
 Based on these classifications, we can see the counts of exact matches, and which ones have not been classified.   
@@ -307,8 +309,8 @@ dt <- cbind(dt, select(predictions, predict_class))
 ```
 
 ```{r load post keras dt covert, echo = F}
-#saveRDS(dt, "gsp_vignette_files/data/dt_post_keras.RDS")
-dt <- readRDS("gsp_vignette_files/data/dt_post_keras.RDS")
+#saveRDS(dt, "vignettes/gsp_vignette_files/data/dt_post_keras.RDS")
+dt <- readRDS("vignettes/gsp_vignette_files/data/dt_post_keras.RDS")
 ```
 
 Because we ran this model on the whole data frame, we can compare our regex classification with the Keras classifications to get a sense of the model performance.  
@@ -538,8 +540,8 @@ indexdf <- do.call('rbind', index) %>% unique()
 ```
 
 ```{r, echo = F}
-#saveRDS(indexdf, "gsp_vignette_files/data/indexdf.rds")
-indexdf <- readRDS("gsp_vignette_files/data/indexdf.rds")
+#saveRDS(indexdf, "vignettes/gsp_vignette_files/data/indexdf.rds")
+indexdf <- readRDS("vignettes/gsp_vignette_files/data/indexdf.rds")
 ```
 
 From the 192 themes, openAlex identifies `r nrow(indexdf)` associated concepts, representing `r sum(indexdf$works_count)` works. 
@@ -568,7 +570,7 @@ for(j in 2000:2020){
 sapply(indexdf$id, FUN = function(x){
   extractWorks(mailto = "belwood@ucdavis.edu",
              concept_page = x,
-             dest_file = paste0("~/Box/govscienceuseR/openalex_index_gsp/", 
+             dest_file = paste0("openalex_index_gsp/", 
                               stringr::str_extract(x,'[A-Za-z0-9]+$'),
                               "_2000_2020", ".json.gz"),
              per_page = 200, # must be between 1 and 200
@@ -589,9 +591,9 @@ smallworks <- filter(indexdf, works_count < 1000000)
 # I did it this way so that if it breaks due to internet connection failure I can see where it leaves off
 for(i in 125:nrow(smallworks)){
 sapply(smallworks$id[i], FUN = function(x){
-  extractWorks(mailto = "belwood@ucdavis.edu",
+  extractWorks(mailto = send_mailto,
              concept_page = x,
-             dest_file = paste0("~/Box/govscienceuseR/openalex_index_gsp/", 
+             dest_file = paste0("openalex_index_gsp/", 
                               stringr::str_extract(x,'[A-Za-z0-9]+$'),
                               "_2000_2020", ".json.gz"),
              per_page = 200, # must be between 1 and 200
@@ -611,7 +613,7 @@ for(i in 1:nrow(largeworks)){
 sapply(largeworks$id[i], FUN = function(x){
   extractWorks(mailto = "belwood@ucdavis.edu",
              concept_page = x,
-             dest_file = paste0("~/Box/govscienceuseR/openalex_index_gsp/", 
+             dest_file = paste0("openalex_index_gsp/", 
                               stringr::str_extract(x,'[A-Za-z0-9]+$'),
                               "_", j, ".json.gz"),
              per_page = 100,
@@ -630,7 +632,7 @@ sapply(largeworks$id[i], FUN = function(x){
 [Note: From here on we are using only a sample of the index, since it takes time to extract]. Intermin index has over 3 million works. This conversion from json concepts to works took 12.5 hours.
 
 ```{r compile records, eval = F}
-jsons <- list.files("~/Box/govscienceuseR/openalex_index_gsp/", full.names = T)
+jsons <- list.files("openalex_index_gsp/", full.names = T)
 # Anything that is 23 is empty
 jsons <- jsons[file.size(jsons) > 23]
 t1 <- Sys.time()
@@ -649,7 +651,7 @@ colnames(recordsdf)[c(1,2,3,5,7,8,10,12)] <- c("source", "title", "doi",
 
 ```{r loads records df covert, echo = F}
 #saveRDS(recordsdf, "~/Box/govscienceuseR/records.rds")
-recordsdf <- readRDS("~/Box/govscienceuseR/records.rds")
+recordsdf <- readRDS("records.rds")
 ```
 
 We've generated quite a wide database, including [draft number based on only a fraction of the concepts of interest: `r nrow(recordsdf)`] records in our index. However, this likely leaves out edge cases, and we are developing ways to develop broader indices.
@@ -681,11 +683,11 @@ Once our probable references have been converted into queries, we will index the
 This is the stage of the process where we also use the Solr software. To start a Solr instance, in the command line/terminal, navigate to your solr download, then start a cloud instance with the `start -c` command. On my computer, Solr is located in my Applications, so my Terminal commands looks like this:  
 
 ```{bash end solr 1, echo = F, eval = F}
-~/Applications/solr-9.1.0/bin/solr stop
+solr stop
 ```
 
 ```{bash start solr}
-~/Applications/solr-9.1.0/bin/solr start -c
+solr start -c
 ```
 
 **CHALLENGES
@@ -728,5 +730,5 @@ results_df = do.call(dplyr::bind_rows, results)
 ```
 
 ```{bash end solr 2}
-~/Applications/solr-9.1.0/bin/solr stop
+solr stop
 ```
