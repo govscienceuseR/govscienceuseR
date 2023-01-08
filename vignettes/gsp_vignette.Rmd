@@ -33,18 +33,17 @@ theme_govuser <- function(base_size = 12, font = "mono") {
 
 Aligning scientific supply with policy demand in order to develop evidence-based policy is considered a gold standard by many accounts. The Biden Administration recently reaffirmed that 'It is the policy of [the Biden] Administration to make evidence-based decisions guided by the best available science and data... Scientific findings should never be distorted or influenced by political considerations' (Biden, 2021). This sentiment has been echoed by the calls for use-inspired basic research to deliver innovative solutions in service of social and environmental goals (Stokes 2011; Fuglie & Toole 2014). 
 
-However, there is broad recognition that promoting evidence-based policymaking at face value overlooks challenges related to knowledge politics and the selective use of science. Namely, policymakers' emphasis on science as a neutral arbiter masks the politics of generating and communicating scientific knowledge (Sarewitz 2000). Rather than seeing science as independent, supply and demand of science are politically linked (Sarewitz & Pielke 2007). As such, research to support evidence-based policymaking requires intentional engagement by scientists to not only reduce uncertainty through high-quality research, but also reduce ambiguity through strategic communication and problem framing (Cairney 2016). Emphasis on communication is echoed by literature on boundary spanners that can broker between the scientific and policy communities (Guston 2001).  
+However, there is broad recognition that promoting evidence-based policymaking at face value overlooks challenges related to knowledge politics and the selective use of science. Namely, policymakers' emphasis on science as a neutral arbiter masks the politics of generating and communicating scientific knowledge (Sarewitz 2000). Science is not value-free, but rather, supply and demand of science are politically linked (Sarewitz & Pielke 2007). As such, research to support evidence-based policymaking requires intentional engagement by scientists to not only reduce uncertainty through high-quality research, but also reduce ambiguity through strategic communication and problem framing (Cairney 2016). Emphasis on communication is echoed by literature on boundary spanners that can broker between the scientific and policy communities (Guston 2001).   
 
 <!--- Qualitative case descriptions have described the recursive science-policy relationship for environmental issues such as acid rain, ozone repletion, and climate change (Pielke & Betsill 1997; Sarewitz 2000)--->
 
-Recognizing the complex interplay of science and policymaking, what methods can we use to better understand these dynamics? Through surveys and interviews of public servants, studies find wide variation in how policy makers interact with scientific information (Newman et al. 2016), and highlight that internal governmental reports and personal networks are among the most popular sources of information (Piczak et al. 2022). These findings have been supported and detailed through a handful of bibliometric analyses of policy documents. Desmaris and Herd (2014) evaluated 102 Regulatory Impact Assessments, confirming a majority of governmental citations and describing the prevalence of disciplines like economics, environmental science, and public health from high-impact journals across 1,378 scholarly citations. Koontz (2022) finds similar trends when analyzing 12 salmon recovery plans, categorizing 1,104 references from various sources (academic, governmental, organizational, etc.) and expanding on how science is used to support causal arguments.  
+Recognizing the complex interplay of science and policymaking, what methods can we use to better understand these dynamics? Through surveys and interviews of public servants, studies find wide variation in how policymakers interact with scientific information (Newman et al. 2016), and highlight that internal governmental reports and personal networks are among the most popular sources of information (Piczak et al. 2022). These findings have been supported and detailed through a handful of bibliometric analyses of policy documents. Desmaris and Herd (2014) evaluated 102 Regulatory Impact Assessments, confirming that the majority of citations are to governmental agencies. They also describe the prevalence of disciplines like economics, environmental science, and public health from high-impact journals across 1,378 scholarly citations. Koontz (2022) finds similar trends when analyzing 12 salmon recovery plans, categorizing 1,104 references from various sources (academic, governmental, organizational, etc.) and expanding on how science is used to support causal arguments.  
 
-The insights from bibliometric analyses of policy documents lay an important foundation for systematically quantifying the evidence used to support policy. However, manually extracting and indexing references can be a tedious task. Unlike 'science of science' research, where bibliometric methods are made easier through publishing norms of citations and indexing (e.g. DOIs, ORCIds, etc.), science of policy research is less systematic. Policy documents do not always follow consistent formatting or citations norms, and references outside of non-scholarly articles (which are the majority of references) are not systematically indexed. However, developments in computational tools for reading and analyzing large texts create an opportunity for automating some of the more tedious phases of bibliometry on policy documents. This paper presents a set of tools for aiding bibliometic analysis of policy documents, `govscienceuseR`, which we hope will support policy process researchers in quantifying and unpacking the complex interplay of science and policymaking.  
+The insights from bibliometric analyses of policy documents lay an important foundation for systematically quantifying the evidence used to support policy. However, manually extracting and indexing references can be a tedious task. Unlike 'science of science' research, where bibliometric methods are made easier through publishing norms of citations and indexing (e.g. DOIs, ORCIDs, etc.), science of policy research is less systematic. Policy documents do not always follow consistent formatting or citation norms, and references outside of non-scholarly articles (which are the majority of references) are not systematically indexed. However, developments in computational tools for reading and analyzing large texts create an opportunity for automating some of the more tedious phases of bibliometry on policy documents. This paper presents a set of tools for aiding bibliometric analysis of policy documents, `govscienceuseR`, which we hope will support policy process researchers in quantifying and unpacking the complex interplay of science and policymaking.  
 
 ### Method  
 
-The `govscienceuseR` tools provide a computational approach for indexing and summarizing references from policy documents. This is vignette walking through the steps of the R packages in the `govscienceuseR` tool set: `referenceExtract`, `referenceClassify`, `indexBuild`, and `referenceSearch`. Together, these four packages allow researchers to go from PDF documents to a data frame of indexed citations in only a handful of steps in the R coding language (steps mapped below). The goal of these tools is to allow researchers working with various types of policy documents to analyze citations using a systematic and reproducible approach.  
-
+The `govscienceuseR` tools provide a computational approach for indexing and summarizing references from policy documents. This is a vignette walking through the steps of the R packages in the `govscienceuseR` tool set: `referenceExtract`, `referenceClassify`, `indexBuild`, and `referenceSearch`. Together, these four packages allow researchers to go from PDF documents to a data frame of indexed citations in only a handful of steps in the R coding language (steps mapped below). The goal of these tools is to allow researchers working with various types of policy documents to analyze citations using a systematic and reproducible approach.  
 
 ```{r workflow image, echo=FALSE, out.width='75%', fig.align = "center"}
 knitr::include_graphics('img/workflow.png')
@@ -52,16 +51,13 @@ knitr::include_graphics('img/workflow.png')
 
 ### Case: Groundwater Sustainability Plans    
 
-California's Sustainable Groundwater Management Act (SGMA) of 2014 sets out a framework for local Groundwater Sustainability Agencies to work towards sustainable management of their groundwater basins. Agencies are required to outline their strategies in Groundwater Sustainability Plans (GSPs) -- documents reviewed by the Department of Water Resources (DWR) to ensure that Agency strategies comply with SGMA, the GSP regulations, and achieve groundwater sustainability for the basin (DWR no date). Among the criteria for plan evaluation, the California Code specifies: "When evaluating whether a Plan is likely to achieve the sustainability goal for the basin, the Department shall consider… Whether the assumptions, criteria, findings, and objectives, including the sustainability goal… are reasonable and supported by the best available information and best available science" (23 CCR § 355.4).  
+California's Sustainable Groundwater Management Act (SGMA) of 2014 sets out a framework for local Groundwater Sustainability Agencies ('Agencies') to work towards sustainable management of their groundwater basins. Agencies are required to outline their strategies in Groundwater Sustainability Plans (GSPs) -- documents reviewed by the Department of Water Resources (DWR) to ensure that Agency strategies comply with SGMA, the GSP regulations, and achieve groundwater sustainability for the basin (DWR no date). Among the criteria for plan evaluation, the California Code specifies: "When evaluating whether a Plan is likely to achieve the sustainability goal for the basin, the Department shall consider… Whether the assumptions, criteria, findings, and objectives, including the sustainability goal… are reasonable and supported by the best available information and best available science" (23 CCR § 355.4).  
 
-There is a clear mandate that GSP documents use scientific evidence to support their strategies for groundwater sustainability, but defining and measuring sustainability is no simple feat (Kuhlman & Farrington 2010). DWR sets out six sustainability indicators, whereby the occurrence of any indicator would be an undesirable result: lowering groundwater levels, reduction of storage, seawater intrusion, degraded quality, land subsidence, and surface water depletion. However, it is the Agencies that set measurable objectives and minimum thresholds for these indicators by considering all 'beneficial users and uses' for their basin (Austin, 2019). Beneficial uses include 'domestic, municipal, agricultural, and industrial supply; power generation; recreation; aesthetic enjoyment; navigation; and preservation and enhancement of fish, wildlife, and other aquatic resources or preserves' (California Water Plan glossary 2018). 
+There is a clear mandate that GSP documents use scientific evidence to support their strategies for groundwater sustainability, but defining and measuring sustainability is no simple feat (Kuhlman & Farrington 2010). DWR sets out six sustainability indicators, whereby the occurrence of any indicator would be an undesirable result: lowering groundwater levels, reduction of storage, seawater intrusion, degraded quality, land subsidence, and surface water depletion. However, each local Agency is responsible for setting measurable objectives and minimum thresholds for these indicators by considering all 'beneficial users and uses' for their basin (Austin, 2019). Beneficial uses include 'domestic, municipal, agricultural, and industrial supply; power generation; recreation; aesthetic enjoyment; navigation; and preservation and enhancement of fish, wildlife, and other aquatic resources or preserves' (California Water Plan glossary 2018). 
 
-Facing the challenge of managing groundwater resources across a wide array of users and interests, we ask: **How is science used to inform the multiple dimensions of groundwater sustainability?** Analyses of the SGMA collaborative process and GSP drafts have already shown that achieving groundwater sustainability while supporting _all_ beneficial uses is unlikely. 
-* Some beneficial uses are preferenced over others: domestic well depths above minimum threshold (Bostic et al. 2020. Sustainable for whom?)  
-* Representation challenges (Dobbin)
+Facing the challenge of managing groundwater resources across a wide array of users and interests, we ask: **How is science used to inform the multiple dimensions of groundwater sustainability?** Analyses of the SGMA collaborative process and GSP drafts have already shown that achieving groundwater sustainability while supporting _all_ beneficial uses is unlikely. Minimum thresholds analyzed in draft plans found that some beneficial uses are preferenced over others, with stakeholders like domestic well users potentially going without water (Bostic et al. 2020). To build on this existing research, we turn to the scientific evidence used in GSPs to tell us about how agencies are defining sustainability. We trial the `govscienceuseR` tool kit on 114 GSPs, described more in the data section below.  
 
-To build on this existing research, we turn to the scientific evidence used in GSPs to tell us something about how agencies are defining sustainability. (and as a result, preferencing some groundwater users over others?). We trial the govscienceuseR tool kit on 114 GSPs, published between X and X year...
-
+<!--- Representation challenges (Dobbin) --->
 
 ### Getting started   
 
@@ -72,22 +68,24 @@ To begin, download all four packages from the [govscienceuseR GitHub page](https
 ```{r package download, warning = F, message = F, results = F}
 devtools::install_github("govscienceuseR/referenceExtract")
 devtools::install_github("govscienceuseR/referenceClassify")
-devtools::install_github("govscienceuseR/referenceBuild")
-devtools::install_github("govscienceuseR/citationSearch")
+devtools::install_github("govscienceuseR/indexBuild")
+devtools::install_github("govscienceuseR/referenceSearch")
 ```
 
 ```{r echo = F}
 send_mailto <- 'tascott@ucdavis.edu'
 ```
-Then load these and dependent packages into library. [**Note: All of the dependent packages required should be imported when we load in these packages, but they currently aren't -- still struggling with package imports when function-building**]. You may be prompted to install some of the dependent packages if you do not already have them, such as `keras`.  
+Then load these and dependent packages into library. You may be prompted to install some of the dependent packages if you do not already have them, such as `keras`.  
+
+<!---[**Note: All of the dependent packages required should be imported when we load in these packages, but they currently aren't -- still struggling with package imports when function-building**]. --->
 
 ```{r package setup, warning = F, message = F, results = F}
 library(referenceExtract)
 library(referenceClassify)
-library(referenceBuild)
-library(citationSearch)
+library(indexBuild)
+library(referenceSearch)
 packs <- c('data.table', 'dplyr', 'stringr', 'keras', 'tensorflow',
-          'tidyr', 'purrr','sjrdata')
+          'tidyr', 'purrr', 'sjrdata')
 if(!'sjrdata' %in% installed.packages()[,'Package']){
   devtools::install_github('ikashnitsky/sjrdata')
 }
@@ -98,15 +96,21 @@ Outside of R, the `referenceSearch` package also requires installation and runni
 
 #### Data    
 
-The documents of interest for this paper are California's Groundwater Sustainability Plans. These documents are available publicly to download from [Box](https://ucdavis.box.com/s/9m3dogbibkrwy01pg4sdwouhzl8i6sef). To follow along with this tutorial, download the files to a file that will be considered your document directory. My document directory is specified below. There are `r length(list.files("reference_classifier/documents_gsp/"))` plans which total over 160,000 pages.  
+The documents of interest for this paper are California's Groundwater Sustainability Plans. These documents are available publicly to download from a [Box](https://ucdavis.box.com/s/9m3dogbibkrwy01pg4sdwouhzl8i6sef) folder we host. To follow along with this tutorial, download the files to a file that will be considered your document directory. Our document directory is specified below. Here we are working with `r length(list.files("~/Box/reference_classifier/documents_gsp/"))` plans which total over 160,000 pages, published between 2019-2022.  
 
 ```{r set doc dir}
-doc_directory <- "reference_classifier/documents_gsp/"
+doc_directory <- "~/Box/reference_classifier/documents_gsp/"
 ```
 
 ```{r count pages, eval = F, echo = F}
 pdfinfo <- lapply(list.files(doc_directory, full.names = T),
                pdftools::pdf_info)
+yeardf <- data.frame()
+for(i in 1:length(pdfinfo)){
+  years <- year(pdfinfo[[i]]$created)
+  yeardf <- rbind(years, yeardf)
+}
+summary(yeardf$X2020L[yeardf$X2020L != 2106])
 pdfs <- data.frame(do.call('rbind', pdfinfo))
 pages <- sum(as.numeric(pdfs$pages))
 pages/nrow(pdfs)
@@ -114,7 +118,7 @@ pages/nrow(pdfs)
 
 ### 1. `referenceExtract`  
 
-The `referenceExtract` package from govscienceuseR is designed to take unstructured PDF documents, feed them through the [anystyle.io](https://anystyle.io/) citation extraction software, and return tagged citation data in a tabular format.   
+The `referenceExtract` package from govscienceuseR is designed to take unstructured PDF documents, feed them through the [anystyle.io](https://anystyle.io/) citation extraction software, and return tagged citation data in a tabular format. This is accomplished using three functions, outlined in the following sections.     
 
 #### `reference_extract()`   
 
@@ -138,7 +142,6 @@ Next, the `reference_compile()` function transforms the JSON files into tabular 
 
 ```{r reference compile}
 # Compile json files into a singular tabular data table
-ref_directory
 dt <- reference_compile(ref_directory)
 ```
 
@@ -150,6 +153,8 @@ DT::datatable(head(select(dt, author, date, title, `container-title`),
 ```
 
 It is noticeable above that the data provided by Anystyle has its challenges for further analysis. The first is a related to data structure: authors are nested into matrices, some rows (such as the date) have multiple listed values, etc., all of which make the data hard to analyze. For example, here is what seems to be two probable citations combined into one observation:  
+
+<!--- Are these examples necessary? --->
 
 ```{r challenge example 1}
 unnest(dt[204, c(2,3)])
@@ -174,7 +179,7 @@ dt <- reference_clean(dt)
 dt <- readRDS("vignettes/gsp_vignette_files/data/dt_post_refclean.RDS")
 ```
 
-This cleaning process has changed probable citations now a bit. Some of the probable citations have been unnested (and therefore expanded) while others have been removed, leaving us with `r nrow(dt)` probable citations. Examples of these probable citations are below:   
+This cleaning process has the changed probable citations now a bit. Some of the probable citations have been unnested (and therefore expanded) while others have been removed, leaving us with `r nrow(dt)` probable citations. Examples of these probable citations are below:   
 
 ```{r example of cleaned, echo = F}
 DT::datatable(head(select(dt, author, year, title, container, publisher), n = 100), rownames = F)
@@ -183,7 +188,7 @@ DT::datatable(head(select(dt, author, year, title, container, publisher), n = 10
 
 ### 2. `referenceClassify`  
 
-The `referenceClassify` package is designed to take a data frame of tabular, tagged citation data (author, year, container, publisher, doi, etc), look for exact matches between those tags and various high-level indices (mainly journal and agency names), and begin to classify probable citations into these high-level categories. These indices are 1:) an index of academic journals from the [`sjr` package](https://rdrr.io/github/ikashnitsky/sjrdata/man/sjr_journals.html) relying on the [Scimago database](https://www.scimagojr.com/), 2) an index of academic conference papers/proceedings also from the Scimago database, 3) and an index of US state and federal agencies, curated by the package authors. All three of these indices are built into this package and can be accessed with `data(scimago.j)` for journals, `data(scimago.c)` for conferences, and `data(agencies)` for agencies.  
+The `referenceClassify` package is designed to take a data frame of tabular, tagged citation data (author, year, container, publisher, doi, etc), look for exact matches between those tags and various high-level indices (mainly journal and agency names), and begin to classify probable citations into these high-level categories. These indices are 1) an index of academic journals from the [`sjr` package](https://rdrr.io/github/ikashnitsky/sjrdata/man/sjr_journals.html) relying on the [Scimago database](https://www.scimagojr.com/), 2) an index of academic conference papers/proceedings also from the Scimago database, 3) and an index of US state and federal agencies, curated by the package authors. All three of these indices are built into this package and can be accessed with `data('scimago.j')` for journals, `data('scimago.c')` for conferences, and `data('agencies')` for agencies.  
 
 <!---
 #### `_match()` functions  
@@ -205,7 +210,7 @@ table(agency_match(dt$container, dt$author))
 
 #### `prepared_by()` and `journal_disambig()`  
 
-[**Note: Should these be moved to the cleaning function, or to the other package?**] 
+<!--Note: Should these be moved to the cleaning function, or to the other package? --->
 
 Before classifying our probable references, we can further clean and refine these potential citations with the `prepared_by()` function, which removes commonly-seen lead-ins to references ('prepared for/by', etc.) to improve exact matching.  
 
@@ -227,6 +232,8 @@ Now with probable references as 'clean' as possible, we use regular expressions 
 # Extract most descriptive 'input' and look for exact match to index 
 dt <- regex_classify(dt, 'container')
 ```
+
+<!--- So below I am pulling out the exact matches for agencies into their own column. Right now the function does not pull out the agency per se, it just tags whether or not it sees a match inside the columns specified in the function. So below I am doing it manually, but this should be built in --->
 
 ```{r exact match agencies, echo = F, eval = F}
 data("agencies")
@@ -295,13 +302,11 @@ kable(pivot_wider(table, names_from = class,
 
 #### `keras_classify()`  
 
-Next we want to classify the probable references that are not exact matches to any of our indices. To do this, we use `keras_classify()` input our probable into a neural network trained to predict the reference class. To train this model, we used data from Environmental Impact Statements, classified through both manual classification and the semi-automated regex classification explained above.  
+Next we want to classify the probable references that are not exact matches to any of our indices. To do this, we use `keras_classify()`, in which we input our probable references into a neural network trained to predict the reference class. To train this model, we used data from Environmental Impact Statements, classified through both manual classification and the semi-automated regex classification explained above.  
 
 ```{r keras, eval = F}
 # Use the descriptive 'input' to probabilistically identify the reference class
-## Note: Need to set this wd right now because I can't actually get the model object to save within the package itself
 setwd("~/Documents/Davis/R-Projects/referenceClassify/")
-# Something is wrong with the auto_input
 predictions <- keras_classify(dt, probability = .85, 
                               'container', auto_input = F,
                               'training_input') 
@@ -348,7 +353,7 @@ kable(pivot_wider(table, names_from = class, values_from = Freq),
   kable_styling()
 ```
 
-And we'll tidy up these data by filtering out the citations classificied to 'delete' (the false positives) in preparation for our indexing in the next step.   
+And we'll tidy up these data by filtering out the citations classified into 'delete' (the false positives) in preparation for our indexing in the next step.   
 ```{r}
 dt <- dt %>% 
   select(-c(predict_class, method_comparison)) %>% 
@@ -382,7 +387,7 @@ dt %>%
   count()
 ```
 
-Of these references, we display the top 15 references journals and agencies identified by our exact matching strategies. At a glance, we see a strong representation of geological, hydrological, and agricultural science...
+Of these references, we display the top 15 references to journals and agencies identified by our exact matching strategies. At a glance, we see a strong representation of geological, hydrological, and agricultural science in both the journals and agency representation. Among agencies, references to USGS are exceptionally large, more than three times that of the second most-referenced agency.  
 
 ```{r wrangle data for plots, echo = F}
 data("scimago.j")
@@ -454,9 +459,9 @@ p_agency <- dt_agencies %>%
 cowplot::plot_grid(p_jour, p_agency, rel_widths = c(1, 1.05))
 ```
 
-Regarding the impact factor of academic references...
+Regarding the impact factor of academic references, we see very little evidence for high-impact journals accounting for more citations. While _Science_, one of the higher impact journals (12.6 SJR score), is among the top 15 journals, the remaining 14 average an SJR score of 2.  
 
-```{r, fig.align='center', fig.width=5, fig.height=3, out.width= '50%'}
+```{r, echo = F, fig.align='center', fig.width=5, fig.height=3, out.width= '50%'}
 dt_journals %>% 
   group_by(journal_title, sjr_avg) %>% 
   count() %>% 
@@ -471,13 +476,11 @@ dt_journals %>%
 
 ### 3. `indexBuild`  
 
-Now that we have a general sense of what kind of reference types are represented within the probable citations, the next step is to try to index these reference exactly. The `indexBuild` package is designed to query the [openAlex API](https://docs.openalex.org/), an open access catalog of research, in order to build a personalized catalog relevant to the field of research. This step is optional for the `govscienceuseR` workflow, as the tool kit provides a default index with the top X research categories over the past X years [**Note: need to build some default index**]. However, building an index for a given research project will likely increase the matching abilities of the tool.  
+Now that we have a general sense of the kinds of reference types that are represented within the probable references, the next step is to try to index these reference exactly. The `indexBuild` package is designed to query the [openAlex API](https://docs.openalex.org/), an open access catalog of research, in order to build a personalized catalog relevant to the field of research. This step is optional for the `govscienceuseR` workflow, as the tool kit provides a default index with [define default index once it is created]. However, building an index for a given research project will likely increase the matching abilities of the tool.  
 
 #### Identify index concepts  
 
-To build an index, we first need to define the scope. openAlex allows indices to be built based on five different types of entities: authors, institutions, venues, concepts, and works. We choose to build our index based on concepts, as this casts the widest and most inclusive net. We use the known journal names we already have in our data to define the concepts that we want in build our index on. To identify these concepts we use journals' disciplinary category metadata from the Scimago database.   
-
-```{r}
+```{r, echo = F}
 themes <- dt_journals %>% 
   select(sourceid, journal_title, cat1:cat13) %>% 
   pivot_longer(cols = cat1:cat13, 
@@ -489,7 +492,7 @@ themes <- dt_journals %>%
   arrange(n)
 ```
 
-Across the journals identified in our references there are `r nrow(themes)` disciplinary categories and the top categories are displayed below.  
+To build an index, we first need to define the scope. openAlex allows indices to be built based on five different types of entities: authors, institutions, venues, concepts, and works. We choose to build our index based on concepts, as this casts the widest and most inclusive net. To identify concepts, we use the journals already identified in our data. We take these journals' disciplinary category metadata from the Scimago database as use these to query the categories in the openAlex data base.   Across the journals identified in our references there are `r nrow(themes)` disciplinary categories and the top categories are displayed below.  
 
 ```{r, echo = F}
 p_theme <- themes %>%
@@ -505,8 +508,8 @@ p_theme <- themes %>%
 ```{r, fig.height = 3, fig.width = 6, fig.align='center', echo = F,out.width= '50%'}
 p_theme
 ```
-[Also consider taking keywords? This is mainly because even though 'water science and technology' is the main theme, this doesn't match to an openAlex concept, and so I didn't want to lose out on concepts like 'water'. But then opens up a whole long list of things I'm not interested in, and because this is a massive list of concepts to build from I'd like to figure out a way to scale it back].  
-```{r}
+<!---[Also consider taking keywords? This is mainly because even though 'water science and technology' is the main theme, this doesn't match to an openAlex concept, and so I didn't want to lose out on concepts like 'water'. But then opens up a whole long list of things I'm not interested in, and because this is a massive list of concepts to build from I'd like to figure out a way to scale it back].  --->
+```{r, echo = F}
 personal_stop <- c("science", "theory", "apply", "theoretical", "information",
                    "uncertainty", "system", "plan", "model", "change")
 keywords <- themes %>% 
@@ -517,23 +520,24 @@ keywords <- themes %>%
   unique()
 ```
 
-Let's use these themes and keywords to inform our index creation. 
-
 #### `queryConcepts()`  
 
-The `queryConcepts()` function allows us to enter themes into openAlex API and find a number of associated research concepts. I input the 192 Scimago themes and keywords into the `concept_string` argument to query the API. 
+We use these themes to inform our index creation through querying openAlex concepts. The `queryConcepts()` function allows us to enter words, based on ours themes, into openAlex API and find a number of associated research concepts. I input the 192 Scimago themes and keywords into the `concept_string` argument to query the API. 
 
-[**Note: I think we should build in sleep time to this function because if you try to input multiple concepts it is rejected**]
+<!---**Note: I think we should build in sleep time to this function because if you try to input multiple concepts it is rejected**]--->
 
 ```{r, eval = F}
+key_themes <- unique(c(themes$cat, keywords$word))
+
+# I am building in a sleep argument to this query function to avoid errors
 query_slowly <- function(x){
   index <- queryConcepts(concept_string = x, 
                          per_page = 50)
   return(index)
   Sys.sleep(1)
 }
-key_themes <- unique(c(themes$cat, keywords$word))
 index <- lapply(key_themes, query_slowly)
+
 # For some reason there was a bit of missing data for particular concepts
 index[[66]]$description <- ''
 indexdf <- do.call('rbind', index) %>% unique()
@@ -544,16 +548,14 @@ indexdf <- do.call('rbind', index) %>% unique()
 indexdf <- readRDS("vignettes/gsp_vignette_files/data/indexdf.rds")
 ```
 
-From the 192 themes, openAlex identifies `r nrow(indexdf)` associated concepts, representing `r sum(indexdf$works_count)` works. 
+From the 192 themes, openAlex identifies `r nrow(indexdf)` associated concepts, representing `r sum(indexdf$works_count)` works. To focus our index, we select only the concepts that are associated with the themes at 'level 0' -- that is, the highest match of relevance. This reduces our concepts down to 15, high-level concepts, representing `r sum(indexdf$works_count)` works. 
 
-[**Note: This is not a sustainable number of works to index, so... need to ditch this or limit it severely**]
+<!---**Note: This is not a sustainable number of works to index, so... need to ditch this or limit it severely**]--->
 
 ```{r, echo = F}
 indexdf <- indexdf %>% 
    filter(level == 0)
 ```
-
-To focus our index, we select only the concepts that are associated with the themes at 'level 0' -- that is, the highest match of relevance (?). This reduces our concepts down to 15, high-level concepts, representing `r sum(indexdf$works_count)` works.
 
 A summary of these concepts is below:
 
@@ -563,10 +565,10 @@ DT::datatable(indexdf[,-c(3,5)], rownames = F)
 
 #### `extractWorks()`  
 
-Using the concept page ID from the previous function, the `extractWorks()` function extracts the associated works from the openAlex API and saves them as compressed .json.gz files. 
+Using the concept page ID from the previous function, the `extractWorks()` function extracts the associated works from the openAlex API and saves them as compressed .json.gz files. The .json.gz files are stored in the `dest_file` specified.  
 
 ```{r, eval = F}
-for(j in 2000:2020){
+for(j in 2000:2010){
 sapply(indexdf$id, FUN = function(x){
   extractWorks(mailto = "belwood@ucdavis.edu",
              concept_page = x,
@@ -581,9 +583,6 @@ sapply(indexdf$id, FUN = function(x){
 })
 }
 ```
-
-The .json.gz files are stored in the `dest_file` specified. 
-
 
 ```{r, eval = F, echo = F}
 smallworks <- filter(indexdf, works_count < 1000000)
@@ -605,40 +604,18 @@ sapply(smallworks$id[i], FUN = function(x){
 }
 ```
 
-```{r, eval = F, echo = F}
-largeworks <- filter(indexdf, works_count >= 1000000)
-
-for(i in 1:nrow(largeworks)){
-  for(j in 2000:2010){
-sapply(largeworks$id[i], FUN = function(x){
-  extractWorks(mailto = "belwood@ucdavis.edu",
-             concept_page = x,
-             dest_file = paste0("openalex_index_gsp/", 
-                              stringr::str_extract(x,'[A-Za-z0-9]+$'),
-                              "_", j, ".json.gz"),
-             per_page = 100,
-             to_date = j,
-             from_date = j,
-             sleep_time = 0.5)
-
-})
-}
-}
-
-```
-
 #### `works2dt()`  
 
-[Note: From here on we are using only a sample of the index, since it takes time to extract]. Intermin index has over 3 million works. This conversion from json concepts to works took 12.5 hours.
+Now that we have .json.gz files containing the works we want in our index, we can convert them into a data table using the `works2dt()` function. This function takes the filepath of the .json.gz compile to convert.  
+
+<!---[Note: From here on we are using only a sample of the index, since it takes time to extract]. Intermin index has over 3 million works. This conversion from json concepts to works took 12.5 hours. --->
 
 ```{r compile records, eval = F}
-jsons <- list.files("openalex_index_gsp/", full.names = T)
+jsons <- list.files("~/Box/govscienceuseR/openalex_index_gsp/", full.names = T)
 # Anything that is 23 is empty
 jsons <- jsons[file.size(jsons) > 23]
-t1 <- Sys.time()
 records <- lapply(jsons, works2dt)
 recordsdf <- do.call("rbind", records)
-t2 <- Sys.time()
 ```
 
 We'll also want to make sure our record data frame has the column names that are compatible with the next stage, so let's go ahead and rename them appropriately.  
@@ -651,18 +628,45 @@ colnames(recordsdf)[c(1,2,3,5,7,8,10,12)] <- c("source", "title", "doi",
 
 ```{r loads records df covert, echo = F}
 #saveRDS(recordsdf, "~/Box/govscienceuseR/records.rds")
-recordsdf <- readRDS("records.rds")
+recordsdf <- readRDS("~/Box/govscienceuseR/records.rds")
 ```
 
-We've generated quite a wide database, including [draft number based on only a fraction of the concepts of interest: `r nrow(recordsdf)`] records in our index. However, this likely leaves out edge cases, and we are developing ways to develop broader indices.
+We've generated quite a wide database, including [draft number based on only a fraction of the concepts of interest: `r nrow(recordsdf)`] records in our index. However, this likely leaves out edge cases, and we are developing ways to develop broader indices.  
 
 ### 4. `referenceSearch`  
 
-Now we have our probable citations and their groupings and we have an index in which to look them up. The final step, supported by the `referenceSearch` package, is to probabilistically match the citation outputs from our GSP documents to the index of journal citations that we just built. 
+Now we have our probable citations and their groupings, and we have an index in which to look them up. The final step, supported by the `referenceSearch` package, is to probabilistically match the reference outputs from our GSP documents to the index of journal citations that we just built.  
+
+#### `index_records()`  
+
+First we want to convert our records of works from openAlex into a database that is searchable using the Solr software. To do this, we will input our records data frame into the `index_records()` function.  
+
+This is the stage of the process where we also use the Solr software. To start a Solr instance, in the command line/terminal, navigate to your solr download, then start a cloud instance with the `start -c` command. 
+
+```{bash start solr, eval = F}
+solr start -c
+```
+
+```{bash, echo = F}
+~/Applications/solr-9.1.0/bin/solr start -c
+```
+
+
+```{r index records, eval = F}
+index_records(recordsdf, collection_name = "gsp_index", overwrite = T)
+```
+
+Now we have a 'collection' called gsp_index that is local within our R session, operable in Solr.  
+
+<!---**CHALLENGES: For index_records, I get this error:   
+Error in collapse(tmp, inner = FALSE, indent = indent) : 
+  R character strings are limited to 2^31-1 bytes
+
+Also the overwrite = T argument does not seem to activate anything, so I have now written gsp_index, gsp_index2, gsp_index3, ugh** --->
 
 #### `create_queries()` 
 
-Let's isolate our probable citations that would likely map onto our index of academic reference. 
+Next, the `create_queries()` takes our probable references extracted and processed in Steps 1 and 2, and converts them into a syntax that allows us to query our index. Since we are querying an index of journals, below I isolate the probable references that would likely map onto our index of academic references, and make sure that it has the appropriate column names. I then feed that data frame of probable references directly into the `create_queries()` functions.  
 
 ```{r}
 dt_solr <- dt %>% 
@@ -676,50 +680,32 @@ dt_solr <- dt %>%
 queries <- create_queries(dt_solr)
 ```
 
-#### `index_records()`  
+We can see that the data have been reformatting to query a data base.  
 
-Once our probable references have been converted into queries, we will index them with `index_records()`. We input the records data frame we generated from the index building and assign it a collection name.  
-
-This is the stage of the process where we also use the Solr software. To start a Solr instance, in the command line/terminal, navigate to your solr download, then start a cloud instance with the `start -c` command. On my computer, Solr is located in my Applications, so my Terminal commands looks like this:  
-
-```{bash end solr 1, echo = F, eval = F}
-solr stop
+```{r}
+queries[103]
 ```
 
-```{bash start solr}
-solr start -c
-```
+#### `search_collection()`  
 
-**CHALLENGES
-For index_records, I get this error: 
-Error in collapse(tmp, inner = FALSE, indent = indent) : 
-  R character strings are limited to 2^31-1 bytes
-  
-Is it too big? 
+Now we are ready to input our queries into the indexed collection to look for reference matches. We input the query into the `search_collection()` function, specify the collection_name, and the number of top-matches that we'd like to view.  
 
-Also the overwrite = T argument does not seem to activate anything, so I have now written gsp_index, gsp_index2, gsp_index3, ugh**
+<!---For search_collection, I get this error:  
+" Error: 400 - undefined field year " --->  
 
-```{r index records, eval = F}
-index_records(recordsdf, collection_name = "gsp_index3", overwrite = T)
-```
-
-Because the index won't build, I tried to see what would happen with just the demo data, but I also get an error: 
-
-For search_collection, I get this error:
-" Error: 400 - undefined field year " 
-
+An example of one query is below.  
 ```{r query index one, eval = F}
-results <- search_collection(q = queries[3], 
-			                       collection_name = "WOS_demo", 
+results <- search_collection(q = queries[102], 
+			                       collection_name = "gsp_index", 
 			                       topn = 3)
 ```
 
-So just saving this until later. 
+We can then iterate this querying process across all `r length(queries)` of our queries.  
 
 ```{r query index large, eval = F}
 results = list()
 count = 1
-for (q in queries[1:10]) {
+for (q in queries) {
   res = search_collection(q, collection_name = "gsp_index")
   res$id = count
   res$q = q
@@ -729,6 +715,15 @@ for (q in queries[1:10]) {
 results_df = do.call(dplyr::bind_rows, results)
 ```
 
-```{bash end solr 2}
+Final results are forthcoming as we finalize this index.  
+
+Make sure to stop your Solr instance:
+
+```{bash end solr false, eval = F}
 solr stop
+```
+
+
+```{bash end solr 2, eval = T, warning = F, message = F, echo = F}
+~/Applications/solr-9.1.0/bin/solr stop
 ```
