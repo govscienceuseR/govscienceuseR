@@ -100,7 +100,7 @@ Outside of R, the `referenceSearch` package also requires installation and runni
 The documents of interest for this paper are California's Groundwater Sustainability Plans. These documents are available publicly to download from a [Box](https://ucdavis.box.com/s/9m3dogbibkrwy01pg4sdwouhzl8i6sef) folder we host. To follow along with this tutorial, download the files to a file that will be considered your document directory. Our document directory is specified below. Here we are working with `r length(list.files("~/Box/reference_classifier/documents_gsp/"))` plans which total over 160,000 pages, published between 2019-2022.  
 
 ```{r set doc dir}
-doc_directory <- "~/Box/reference_classifier/documents_gsp/"
+doc_directory <- "reference_classifier/documents_gsp/"
 ```
 
 ```{r count pages, eval = F, echo = F}
@@ -612,7 +612,7 @@ Now that we have .json.gz files containing the works we want in our index, we ca
 <!---[Note: From here on we are using only a sample of the index, since it takes time to extract]. Intermin index has over 3 million works. This conversion from json concepts to works took 12.5 hours. --->
 
 ```{r compile records, eval = F}
-jsons <- list.files("~/Box/govscienceuseR/openalex_index_gsp/", full.names = T)
+jsons <- list.files("openalex_index_gsp/", full.names = T)
 # Anything that is 23 is empty
 jsons <- jsons[file.size(jsons) > 23]
 records <- lapply(jsons, works2dt)
@@ -629,7 +629,7 @@ colnames(recordsdf)[c(1,2,3,5,7,8,10,12)] <- c("source", "title", "doi",
 
 ```{r loads records df covert, echo = F}
 #saveRDS(recordsdf, "~/Box/govscienceuseR/records.rds")
-recordsdf <- readRDS("~/Box/govscienceuseR/records.rds")
+recordsdf <- readRDS("govscienceuseR/records.rds")
 ```
 
 We've generated quite a wide database, including [draft number based on only a fraction of the concepts of interest: `r nrow(recordsdf)`] records in our index. However, this likely leaves out edge cases, and we are developing ways to develop broader indices.  
