@@ -55,6 +55,10 @@
 #' 
 #' Maintainer: Tyler A. Scott \email{tascott@@ucdavis.edu}
 #'
-#' 
+## token imports 
+#' @import referenceExtract
+#' @import referenceSearch
+#' @import indexBuild
+#' @import referenceClassify
 
 NULL
