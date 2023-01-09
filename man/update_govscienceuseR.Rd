@@ -8,16 +8,16 @@ update_govscienceuseR(..., ask = FALSE, checkBuilt = TRUE)
 }
 \arguments{
 \item{\dots}{Additional arguments to be passed to
-\code{\link{update_packages}}.}
+\code{\link[devtools-remote-reexports]{devtools::update_packages}}.}
 
-\item{ask, checkBuilt}{Arguments to \code{\link{devtools::update_packages}}
+\item{ask, checkBuilt}{Arguments to \code{\link[devtools-remote-reexports]{devtools::update_packages}}
 documentation. The defaults are different from those of that function.}
 }
 \value{
 \code{update_govscienceuseR} returns NULL invisibly.
 }
 \description{
-A wrapper around \code{\link{devtools::update_packages()}} to update the core component
+A wrapper around \code{\link[devtools]{update_packages}} to update the core component
 packages of the \pkg{govscienceuseR} to their latest versions.
 }
 \details{
@@ -42,7 +42,6 @@ govscienceuseR::update_govscienceuseR()
 
 }
 \seealso{
-\code{\link{setRepositories}}, \code{\link{update_packages}},
-\code{\link{install.packages}}
+\code{\link[devtools-remote-reexports]{devtools::update_packages}}, \code{\link{setRepositories}}
 }
 \keyword{utilities}

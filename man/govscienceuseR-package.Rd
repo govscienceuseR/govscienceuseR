@@ -16,7 +16,7 @@ and load multiple \code{govscienceuseR} packages in a single step.
 \code{govscienceuseR} software implements advances in tagging, classifying,
 and disambiguating references found in unstructured text (e.g., PDFs).
 Together, the set of packages provide a workflow that ultimately allows
-the user to perform a range of bibliometric analyses.
+the user to perform bibliometric analysis.
 
 The code is actively developed and maintained by the \code{govscienceuseR}
 development team. New functionality is being added over time.
